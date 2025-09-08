@@ -1,3 +1,4 @@
+// src/app/page.tsx
 import Link from "next/link";
 
 const hero = {
@@ -38,8 +39,7 @@ const articles = [
   },
   {
     category: "Geral",
-    title:
-      "Estado promove maior consulta cidadã já lançada",
+    title: "Estado promove maior consulta cidadã já lançada",
     image:
       "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=800&q=60",
   },
@@ -53,8 +53,9 @@ const articles = [
 
 export default function Page() {
   return (
-    <div className="space-y-8">
-      <section className="relative h-64 sm:h-96 overflow-hidden rounded-xl">
+    <div className="space-y-12">
+      {/* Hero / Destaque */}
+      <section className="relative h-64 sm:h-96 overflow-hidden rounded-2xl">
         <img
           src={hero.image}
           alt=""
@@ -71,17 +72,14 @@ export default function Page() {
         </div>
       </section>
 
+      {/* Cards */}
       <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {articles.map((a) => (
           <article
             key={a.title}
-            className="token-surface overflow-hidden rounded-lg"
+            className="token-surface overflow-hidden rounded-xl border token-border"
           >
-            <img
-              src={a.image}
-              alt=""
-              className="h-40 w-full object-cover"
-            />
+            <img src={a.image} alt="" className="h-40 w-full object-cover" />
             <div className="p-4">
               <span className="mb-1 inline-block text-xs font-semibold text-[var(--accent)]">
                 {a.category}
@@ -92,15 +90,39 @@ export default function Page() {
         ))}
       </section>
 
-      <div className="text-center">
-        <Link
-          href="/admin/login"
-          className="inline-block rounded-md bg-[var(--brand)] px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-[var(--accent)]"
-        >
-          Acessar área admin
-        </Link>
-      </div>
+      {/* CTA + Features */}
+      <section className="space-y-8">
+        <div className="rounded-2xl border token-border bg-gradient-to-r from-[var(--brand)]/20 to-[var(--accent)]/20 p-8 text-center">
+          <h2 className="mb-2 text-3xl font-extrabold">Bem-vindo ao Portal</h2>
+          <p className="mb-6 opacity-80">
+            Uma experiência moderna com conteúdos atualizados.
+          </p>
+          <Link
+            href="/admin/login"
+            className="inline-block rounded-md bg-[var(--brand)] px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-[var(--accent)]"
+          >
+            Acessar área admin
+          </Link>
+        </div>
+
+        <ul className="grid gap-6 sm:grid-cols-3">
+          <li className="token-surface rounded-xl p-6 text-center border token-border">
+            <div className="mb-2 text-2xl">⚡</div>
+            <h3 className="mb-1 font-semibold">Rápido</h3>
+            <p className="text-sm opacity-80">Interface leve e responsiva.</p>
+          </li>
+          <li className="token-surface rounded-xl p-6 text-center border token-border">
+            <div className="mb-2 text-2xl">🎨</div>
+            <h3 className="mb-1 font-semibold">Visual moderno</h3>
+            <p className="text-sm opacity-80">Cores pensadas para conforto.</p>
+          </li>
+          <li className="token-surface rounded-xl p-6 text-center border token-border">
+            <div className="mb-2 text-2xl">🔐</div>
+            <h3 className="mb-1 font-semibold">Admin seguro</h3>
+            <p className="text-sm opacity-80">Gerencie artigos facilmente.</p>
+          </li>
+        </ul>
+      </section>
     </div>
   );
 }
-
