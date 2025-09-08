@@ -1,0 +1,1 @@
+export default function Page(){return(<div className="token-surface border token-border rounded-2xl p-6">UI renovada instalada. Vá em /admin/login para testar.</div>);}
