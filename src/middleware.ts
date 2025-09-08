@@ -1,4 +1,3 @@
-﻿@'
 import { auth } from "@/lib/auth";
 import { NextResponse } from "next/server";
 
@@ -22,4 +21,3 @@ export default auth((req) => {
 });
 
 export const config = { matcher: ["/admin/:path*"] };
-'@ | Set-Content .\src\middleware.ts -Encoding utf8
