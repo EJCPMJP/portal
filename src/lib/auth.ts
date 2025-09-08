@@ -1,4 +1,3 @@
-@'
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
@@ -13,7 +12,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       name: "Login",
       credentials: {
         email: { label: "E-mail", type: "text" },
-        password: { label: "Senha", type: "password" },
+        password: { label: "Senha", type: "password" }
       },
       async authorize(c) {
         const adminEmail = process.env.ADMIN_EMAIL;
@@ -23,8 +22,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return { id: "admin", email: c.email, name: "Admin", role: "admin" } as any;
         }
         return null;
-      },
-    }),
+      }
+    })
   ],
   callbacks: {
     async jwt({ token, user }) {
@@ -34,7 +33,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async session({ session, token }) {
       (session as any).user.role = (token as any).role || "reader";
       return session;
-    },
-  },
+    }
+  }
 });
-'@ | Set-Content -Encoding UTF8 .\src\lib\auth.ts
