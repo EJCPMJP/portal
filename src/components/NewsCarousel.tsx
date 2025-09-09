@@ -3,7 +3,12 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-type Article = { title: string; image: string; slug: string };
+type Article = {
+  title: string;
+  subtitle?: string | null;
+  image: string;
+  slug: string;
+};
 
 export default function NewsCarousel({ articles }: { articles: Article[] }) {
   const [index, setIndex] = useState(0);
@@ -34,6 +39,9 @@ export default function NewsCarousel({ articles }: { articles: Article[] }) {
         <h1 className="text-2xl sm:text-4xl font-extrabold leading-tight">
           {current.title}
         </h1>
+        {current.subtitle && (
+          <p className="text-sm sm:text-lg">{current.subtitle}</p>
+        )}
       </div>
     </Link>
   );
