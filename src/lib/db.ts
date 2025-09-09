@@ -1,8 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 
-// Lazily instantiate Prisma so builds without a DATABASE_URL do not fail.
-// The real client is only created when first used at runtime and the
-// environment variable is available.
+// Instancia o Prisma apenas quando algum método é chamado.
+// Assim, builds sem DATABASE_URL não falham e o cliente real
+// é criado apenas em tempo de execução.
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
 let prismaInstance: PrismaClient | undefined = globalForPrisma.prisma;
@@ -22,9 +22,7 @@ export const prisma = new Proxy(
           globalForPrisma.prisma ??
           new PrismaClient({
             datasources: {
-              db: {
-                url: process.env.DATABASE_URL,
-              },
+              db: { url: process.env.DATABASE_URL },
             },
           });
 
@@ -33,7 +31,7 @@ export const prisma = new Proxy(
         }
       }
 
-      // @ts-expect-error dynamic access on the Prisma proxy
+      // @ts-expect-error acesso dinâmico ao proxy
       return prismaInstance[prop];
     },
   }
