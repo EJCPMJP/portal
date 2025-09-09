@@ -16,7 +16,10 @@ export default async function ArticlePage({
   return (
     <article className="token-surface border token-border rounded-2xl p-6 space-y-4">
       <h1 className="text-3xl font-bold">{article.title}</h1>
-      <img src={article.image} alt="" className="w-full rounded-lg" />
+      {article.subtitle && <h2 className="text-xl">{article.subtitle}</h2>}
+      {article.image && (
+        <img src={article.image} alt="" className="w-full rounded-lg" />
+      )}
       <p className="whitespace-pre-line">{article.content}</p>
     </article>
   );

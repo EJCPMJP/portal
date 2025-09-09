@@ -8,6 +8,8 @@ async function create(formData: FormData) {
   const title = String(formData.get("title") || "").trim();
   const slug = String(formData.get("slug") || "").trim();
   const image = String(formData.get("image") || "").trim();
+  const subtitle = String(formData.get("subtitle") || "").trim();
+  const important = formData.get("important") === "on";
   const content = String(formData.get("content") || "").trim();
 
   if (!title || !slug || !content) return;
@@ -18,6 +20,8 @@ async function create(formData: FormData) {
       slug,
       content,
       image: image || null, // compatível com image String?
+      subtitle: subtitle || null,
+      important,
     },
   });
 
@@ -51,11 +55,21 @@ export default function New() {
         placeholder="URL da imagem (opcional)"
       />
 
+      <input
+        name="subtitle"
+        className="px-3 py-2 rounded-lg token-surface border token-border"
+        placeholder="Subtítulo"
+      />
+
       <textarea
         name="content"
         className="px-3 py-2 rounded-lg token-surface border token-border min-h-[160px]"
         placeholder="Conteúdo"
       />
+
+      <label className="flex items-center gap-2 text-sm">
+        <input type="checkbox" name="important" /> Importante
+      </label>
 
       <button
         type="submit"
