@@ -5,9 +5,16 @@ import NewsCarousel from "@/components/NewsCarousel";
 export const dynamic = "force-dynamic";
 
 export default async function Page() {
-  const articles = await prisma.article.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+  const [featured, articles] = await Promise.all([
+    prisma.article.findMany({
+      where: { important: true },
+      orderBy: { createdAt: "desc" },
+    }),
+    prisma.article.findMany({
+      where: { important: false },
+      orderBy: { createdAt: "desc" },
+    }),
+  ]);
 
   return (
     <div className="space-y-12">
@@ -25,13 +32,13 @@ export default async function Page() {
         </Link>
       </section>
 
-      {/* Carrossel de notícias se houver artigos */}
-      {articles.length > 0 && <NewsCarousel articles={articles} />}
+      {/* Carrossel de notícias se houver artigos destacados */}
+      {featured.length > 0 && <NewsCarousel articles={featured} />}
 
       {/* Lista de artigos (cards) */}
-      {articles.length > 1 && (
+      {articles.length > 0 && (
         <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {articles.slice(1).map((a) => (
+          {articles.map((a) => (
             <Link
               key={a.id}
               href={`/artigos/${a.slug}`}
@@ -46,6 +53,9 @@ export default async function Page() {
               )}
               <div className="p-4">
                 <h2 className="font-semibold leading-snug">{a.title}</h2>
+                {a.subtitle && (
+                  <p className="text-sm opacity-80">{a.subtitle}</p>
+                )}
               </div>
             </Link>
           ))}
@@ -53,7 +63,7 @@ export default async function Page() {
       )}
 
       {/* Caso não haja artigos, um placeholder simples */}
-      {articles.length === 0 && (
+      {featured.length === 0 && articles.length === 0 && (
         <div className="token-surface rounded-xl p-6 text-center border token-border">
           <p className="mb-4 opacity-80">Nenhum artigo publicado ainda.</p>
           <Link

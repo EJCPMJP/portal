@@ -8,6 +8,8 @@ async function update(id: string, formData: FormData) {
   const title = String(formData.get("title") || "");
   const slug = String(formData.get("slug") || "");
   const image = String(formData.get("image") || "");
+  const subtitle = String(formData.get("subtitle") || "");
+  const important = formData.get("important") === "on";
   const content = String(formData.get("content") || "");
 
   await prisma.article.update({
@@ -17,6 +19,8 @@ async function update(id: string, formData: FormData) {
       slug,
       content,
       image: image || null, // se vazio, salva null (compatível com image String?)
+      subtitle: subtitle || null,
+      important,
     },
   });
 
@@ -56,12 +60,24 @@ export default async function Edit({ params }: { params: { id: string } }) {
         placeholder="URL da imagem (opcional)"
       />
 
+      <input
+        defaultValue={a.subtitle ?? ""}
+        name="subtitle"
+        className="px-3 py-2 rounded-lg token-surface border token-border"
+        placeholder="Subtítulo"
+      />
+
       <textarea
         defaultValue={a.content}
         name="content"
         className="px-3 py-2 rounded-lg token-surface border token-border min-h-[160px]"
         placeholder="Conteúdo"
       />
+
+      <label className="flex items-center gap-2 text-sm">
+        <input type="checkbox" name="important" defaultChecked={a.important} />
+        Importante
+      </label>
 
       <button
         type="submit"
