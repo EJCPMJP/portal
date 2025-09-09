@@ -1,0 +1,1 @@
+export default function AdminHome(){return(<div className="token-surface border token-border rounded-2xl p-6"><h1 className="text-2xl font-bold mb-2">Painel</h1><p>Bem-vindo!</p></div>);}

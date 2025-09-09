@@ -1,0 +1,1 @@
+export default function Footer(){return(<footer className="border-t token-border mt-10"><div className="container py-8 text-sm flex items-center justify-between"><p>© {new Date().getFullYear()} Portal</p><p>Next.js</p></div></footer>);}

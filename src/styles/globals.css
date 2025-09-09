@@ -1,0 +1,4 @@
+/* UI palette */
+@tailwind base;@tailwind components;@tailwind utilities;
+:root{--bg:#0e1116;--surface:#12161d;--fg:#e9eef6;--border:#222b36;--brand:#7ab3ff;--accent:#ffbe6e}
+html,body{height:100%}body{background:var(--bg);color:var(--fg)}.container{margin:0 auto;max-width:72rem;padding:0 1rem}.token-border{border-color:var(--border)}.token-surface{background:var(--surface)}
