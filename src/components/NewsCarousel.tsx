@@ -6,8 +6,6 @@ import Link from 'next/link';
 type Article = {
   title: string;
   subtitle?: string | null;
-  image?: string | null;
-  slug: string;
 };
 
 export default function NewsCarousel({ articles }: { articles: Article[] }) {
