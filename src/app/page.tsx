@@ -2,7 +2,8 @@ import Link from "next/link";
 import { prisma } from "@/lib/db";
 import NewsCarousel from "@/components/NewsCarousel";
 
-export const dynamic = "force-dynamic";
+export const runtime = "nodejs";       // ✅ adicionado
+export const dynamic = "force-dynamic"; // (pode manter)
 
 export default async function Page() {
   const [featured, articles] = await Promise.all([
