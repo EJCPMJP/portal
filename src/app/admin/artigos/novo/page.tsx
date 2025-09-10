@@ -1,8 +1,9 @@
 import { prisma } from "@/lib/db";
 import { redirect } from "next/navigation";
 
-export const runtime = "nodejs";       // ✅ adicionado
+export const runtime = "nodejs";       // ✅ adicionar
 export const dynamic = "force-dynamic";
+
 
 async function create(formData: FormData) {
   "use server";
