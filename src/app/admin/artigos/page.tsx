@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 
+export const runtime = "nodejs";       // ✅ adicionar
 export const dynamic = "force-dynamic";
+
 
 type Article = { id: string; title: string };
 
