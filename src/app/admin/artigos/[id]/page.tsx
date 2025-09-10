@@ -1,10 +1,13 @@
 import { prisma } from "@/lib/db";
 import { notFound, redirect } from "next/navigation";
 
+export const runtime = "nodejs";       // ✅ adicionado
 export const dynamic = "force-dynamic";
 
 async function update(id: string, formData: FormData) {
   "use server";
+  // ...
+
   const title = String(formData.get("title") || "");
   const slug = String(formData.get("slug") || "");
   const image = String(formData.get("image") || "");
