@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 
+export const runtime = "nodejs";       // ✅ adicionado
 export const dynamic = "force-dynamic";
 
 export default async function ArticlePage({
@@ -12,6 +13,7 @@ export default async function ArticlePage({
     where: { slug: params.slug },
   });
   if (!article) return notFound();
+
 
   return (
     <article className="token-surface border token-border rounded-2xl p-6 space-y-4">
